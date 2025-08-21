@@ -73,7 +73,7 @@ class VideoTimer {
         this.passwordValue.classList.add('hidden');
         this.copyButton.classList.add('hidden');
         
-        window.open('https://youtu.be/X0JpI06z2E4?si=9BBQQQvn940LR-mu', '_blank', 'noopener,noreferrer');
+        window.open('https://youtu.be/i4F6SPWF6WM?si=9iOROdVCIsH-3kpq', '_blank', 'noopener,noreferrer');
         this.likeButton.disabled = true;
         this.finalWatchButton.disabled = false;
         this.likeButton.innerHTML = '<span>تم الإعجاب</span>';

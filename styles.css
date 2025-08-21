@@ -1,0 +1,374 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans Arabic', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    direction: rtl;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.button-sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between buttons */
+    margin-bottom: 30px; /* Space before timer/password sections */
+}
+
+.watch-btn, .show-password-btn {
+    background: #FF0000;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    width: 100%; /* Make buttons full width in sequence */
+}
+
+.watch-btn:hover:not([disabled]), .show-password-btn:hover:not([disabled]) {
+    background: #E60000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 0, 0, 0.4);
+}
+
+.watch-btn:active:not([disabled]), .show-password-btn:active:not([disabled]) {
+    transform: translateY(0);
+}
+
+.watch-btn[disabled] {
+    background: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+    transform: none;
+}
+
+.timer-section, .password-section {
+    margin-top: 30px;
+    animation: fadeInUp 0.5s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timer-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px dashed #ddd;
+}
+
+.timer-card h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.timer-display {
+    margin: 20px 0;
+}
+
+.time-circle {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+    transition: stroke-dasharray 0.3s ease;
+}
+
+.progress-ring-progress {
+    stroke-dasharray: 327; /* 2πr where r=52 */
+    stroke-dashoffset: 327;
+    transition: stroke-dashoffset 1s ease;
+    stroke-linecap: round;
+}
+
+.time-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#timeRemaining {
+    font-size: 24px;
+    font-weight: 700;
+    color: #4CAF50;
+    display: block;
+}
+
+.time-label {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    width: 0%;
+    transition: width 1s ease;
+    border-radius: 4px;
+}
+
+.password-section {
+    background: #f0f8f0;
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px solid #4CAF50;
+}
+
+.success-animation {
+    margin-bottom: 20px;
+}
+
+.checkmark {
+    animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.password-section h2 {
+    color: #4CAF50;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.password-display {
+    background: white;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.password-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.password-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #4CAF50;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    word-break: break-all;
+}
+
+.copy-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.copy-btn:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+.helper-note { 
+    color:#444; 
+    font-size:14px; 
+    margin:-15px 0 20px; 
+}
+
+.away-info { display:flex; align-items:center; gap:8px; font-size:14px; color:#444; margin-top:8px; }
+.status-dot { width:8px; height:8px; border-radius:50%; background:#28a745; display:inline-block; }
+.status-dot.away { background:#dc3545; }
+
+#playerWrapper { 
+    position:relative; 
+    width:100%; 
+    aspect-ratio:16/9; 
+    margin-top:16px; 
+    border-radius:12px; 
+    overflow:hidden; 
+    background:#000; 
+}
+#player { 
+    position:absolute; 
+    inset:0; 
+    width:100%; 
+    height:100%; 
+}
+.notice { 
+    background:#fff3cd; 
+    color:#7a5b00; 
+    border:1px solid #ffe69c; 
+    padding:10px 12px; 
+    border-radius:10px; 
+    font-size:14px; 
+    margin:10px 0; 
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .card {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    .description {
+        font-size: 14px;
+    }
+    
+    .watch-btn, .show-password-btn {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+    
+    .timer-card, .password-section {
+        padding: 20px;
+    }
+    
+    .time-circle {
+        transform: scale(0.9);
+    }
+    
+    #timeRemaining {
+        font-size: 20px;
+    }
+    
+    .password-value {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 25px 15px;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+    
+    .watch-btn, .show-password-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+    
+    .time-circle {
+        transform: scale(0.8);
+    }
+    
+    .password-value {
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,104 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاهدة الفيديو</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23 12L8 21V3L23 12Z" fill="#FF0000"/>
+                    <rect x="1" y="3" width="6" height="18" rx="1" fill="#FF0000"/>
+                </svg>
+            </div>
+            
+            <h1>مشاهدة الفيديو المطلوب</h1>
+            <p class="description">اضغط على الأزرار بالترتيب لإكمال المهمة ومشاهدة الفيديو.</p>
+            <p class="helper-note">الرجاء: إكمال المهام، ومشاهدة 40 ثانية على الأقل، عمل إعجاب، وترك تعليق جميل على الفيديو.</p>
+            
+            <div class="button-sequence">
+                <button id="subscribeButton" class="watch-btn">
+                    <span>اشترك في القناة</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 21V19C16 18.4696 15.7893 17.9609 15.4142 17.5858C15.0391 17.2107 14.5304 17 14 17H10C9.46957 17 8.96086 17.2107 8.58579 17.5858C8.21071 17.9609 8 18.4696 8 19V21M12 13C14.2091 13 16 11.2091 16 9C16 6.79086 14.2091 5 12 5C9.79086 5 8 6.79086 8 9C8 11.2091 9.79086 13 12 13ZM20 8H23M21.5 6.5V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button id="likeButton" class="watch-btn" disabled>
+                    <span>أعجبني الفيديو</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 11V21H12C11.4696 21 10.9609 20.7893 10.5858 20.4142C10.2107 20.0391 10 19.5304 10 19V12.72L7.38 10.1C7.1437 9.8732 6.94271 9.60538 6.78693 9.30932C6.63116 9.01326 6.52225 8.69463 6.46647 8.36594C6.41068 8.03725 6.40822 7.69899 6.45942 7.37039C6.51062 7.04179 6.61483 6.72624 6.76813 6.43936C6.92143 6.15248 7.12185 5.89745 7.36154 5.68412C7.60124 5.47078 7.8767 5.30231 8.17416 5.18683C8.47162 5.07136 8.7877 5.00949 9.10665 5.00392C9.4256 4.99836 9.74311 5.04918 10.0463 5.15468C10.3495 5.26018 10.6353 5.41908 10.8931 5.626L18 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V12C1 11.4696 1.21071 10.9609 1.58579 10.5858C1.96086 10.2107 2.46957 10 3 10H7V21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button id="finalWatchButton" class="watch-btn" disabled>
+                    <span>مشاهدة الفيديو</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15 3H21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="timerSection" class="timer-section hidden">
+                <div class="timer-card">
+                    <h2>انتظر حتى انتهاء التوقيت</h2>
+                    <div class="timer-display">
+                        <div class="time-circle">
+                            <svg class="progress-ring" width="120" height="120">
+                                <circle class="progress-ring-circle" stroke="#e5e5e5" stroke-width="6" fill="transparent" r="52" cx="60" cy="60"/>
+                                <circle class="progress-ring-progress" stroke="#4CAF50" stroke-width="6" fill="transparent" r="52" cx="60" cy="60"/>
+                            </svg>
+                            <div class="time-text">
+                                <span id="timeRemaining">0:40</span>
+                                <div class="time-label">متبقي</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <div id="pauseNotice" class="notice hidden">تم إيقاف العداد مؤقتًا. الوقت لا يُحتسب أثناء وجودك في هذه الصفحة. من فضلك عُد لمتابعة مشاهدة الفيديو على يوتيوب.</div>
+                </div>
+            </div>
+            
+            <div id="passwordSection" class="password-section hidden">
+                <div class="success-animation">
+                    <div class="checkmark">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" fill="#4CAF50"/>
+                            <path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <h2>تم إكمال المشاهدة!</h2>
+                
+                <button id="showPasswordButton" class="show-password-btn">
+                    <span>إظهار كلمة السر</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 12S4 4 12 4S23 12 23 12S20 20 12 20S1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <div class="password-display">
+                    <div class="password-label">كلمة السر:</div>
+                    <div class="password-value hidden" id="passwordValue">SUCCESS2024</div>
+                    <button id="copyButton" class="copy-btn hidden">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M5 15H4C3.46957 15 2.96086 14.7893 2.58579 14.4142C2.21071 14.0391 2 13.5304 2 13V4C2 3.46957 2.21071 2.96086 2.58579 2.58579C2.96086 2.21071 3.46957 2 4 2H13C13.5304 2 14.0391 2.21071 14.4142 2.58579C14.7893 2.96086 15 3.46957 15 4V5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        نسخ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -101,7 +101,7 @@ class VideoTimer {
                 </svg>`;
         } else if (this.finalWatchButtonClickedCount === 2) {
             // Second click: Open YouTube video and start timer
-            window.open('https://youtu.be/X0JpI06z2E4?si=9BBQQQvn940LR-mu', '_blank', 'noopener,noreferrer');
+            window.open('https://youtu.be/i4F6SPWF6WM?si=9iOROdVCIsH-3kpq', '_blank', 'noopener,noreferrer');
             
             // Show timer section
             this.timerSection.classList.remove('hidden');

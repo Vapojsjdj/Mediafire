@@ -1,0 +1,153 @@
+-- تشغيل الهب الأصلي
+loadstring(game:HttpGet("https://raw.githubusercontent.com/MoziIOnTop/MoziIHub/refs/heads/main/GrowaGarden"))()
+
+-- وظيفة تغيير النصوص الأصلية
+local function editText(obj)
+    if obj:IsA("TextLabel") or obj:IsA("TextButton") then
+        if string.find(string.lower(obj.Text), "mozi") or string.find(string.lower(obj.Text), "made by") then
+            obj.Text = "BY ROBLX MODS"
+            task.spawn(function()
+                while task.wait(0.1) and obj.Parent do
+                    local t = tick() * 2
+                    obj.TextColor3 = Color3.fromHSV((t % 1), 1, 1)
+                end
+            end)
+        end
+    end
+end
+
+for _, obj in ipairs(game:GetDescendants()) do
+    editText(obj)
+end
+
+game.DescendantAdded:Connect(function(obj)
+    task.wait(0.5)
+    editText(obj)
+end)
+
+-- ===== إنشاء واجهة احترافية للقائمة =====
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "PetsTierListGui"
+ScreenGui.Parent = PlayerGui
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 400, 0, 600)
+Frame.Position = UDim2.new(0, 50, 0, 50)
+Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame.BorderSizePixel = 0
+Frame.Parent = ScreenGui
+Frame.Active = true
+Frame.Draggable = true -- لجعل الإطار قابل للسحب
+
+-- Title
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "Pets Tier Ranking"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 22
+Title.Parent = Frame
+
+-- Close button
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+CloseBtn.Position = UDim2.new(1, -35, 0, 5)
+CloseBtn.Text = "X"
+CloseBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseBtn.Font = Enum.Font.SourceSansBold
+CloseBtn.TextSize = 18
+CloseBtn.Parent = Frame
+
+CloseBtn.MouseButton1Click:Connect(function()
+    ScreenGui.Enabled = false
+end)
+
+-- Hide/Show button
+local HideBtn = Instance.new("TextButton")
+HideBtn.Size = UDim2.new(0, 60, 0, 25)
+HideBtn.Position = UDim2.new(1, -100, 0, 10)
+HideBtn.Text = "Hide"
+HideBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+HideBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+HideBtn.Font = Enum.Font.SourceSans
+HideBtn.TextSize = 16
+HideBtn.Parent = Frame
+
+HideBtn.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible
+    HideBtn.Text = Frame.Visible and "Hide" or "Show"
+end)
+
+-- Scroll frame
+local Scroll = Instance.new("ScrollingFrame")
+Scroll.Size = UDim2.new(1, 0, 1, -40)
+Scroll.Position = UDim2.new(0, 0, 0, 40)
+Scroll.CanvasSize = UDim2.new(0, 0, 0, 0) -- سيتم تحديثه لاحقاً
+Scroll.ScrollBarThickness = 6
+Scroll.BackgroundTransparency = 1
+Scroll.Parent = Frame
+
+-- UIStroke Rainbow
+local stroke = Instance.new("UIStroke")
+stroke.Thickness = 3
+stroke.Parent = Frame
+task.spawn(function()
+    while task.wait(0.1) and Frame.Parent do
+        local t = tick() * 1.5
+        stroke.Color = Color3.fromHSV((t % 1), 1, 1)
+    end
+end)
+
+-- ===== بيانات الـ Pets حسب Tier =====
+local tiers = {
+    ["S Tier"] = {"Raccoon", "Golden Goose", "Kitsune", "Disco Bee", "T-Rex", "Corrupted Kitsune", "Raiju", "Lobster Thermidor", "French Fry Ferret", "Spinosaurus", "Dragonfly", "Butterfly", "Blood Hedgehog", "Moon Cat", "Spaghetti Sloth", "Kappa"},
+    ["A Tier"] = {"Sushi Bear", "Triceratops", "Pterodactyl", "Capybara", "Pancake Mole", "Mole", "Mimic Octopus", "Queen Bee", "Griffin", "Tanchozuru", "Spriggan", "Hotdog Daschund", "Dairy Cow", "Gorilla Chef", "Moth", "Brontosaurus", "Ostrich", "Seal"},
+    ["B Tier"] = {"Junkbot", "Hyacinth Macaw", "Scarlet Macaw", "Red Fox", "Blood Owl", "Jackalope", "Hedgehog", "Tarantula Hawk", "Bear Bee", "Night Owl", "Polar Bear", "Wasp", "Raptor", "Pachycephalosaurus", "Mochi Mouse", "Iguanodon"},
+    ["C Tier"] = {"Snake", "Fennec Fox", "Honey Bee", "Petal Bee", "Bee", "Red Giant Ant", "Giant Ant", "Bald Eagle", "Owl", "Praying Mantis", "Corrupted Kodama", "Kodama", "Squirrel", "Peacock", "Toucan", "Bacon Pig", "Axolotl", "Meerkat", "Stegosaurus", "Seedling", "Chicken Zombie", "Starfish"},
+    ["D Tier"] = {"Ankylosaurus", "Golem", "Hamster", "Orangutan", "Nihonzaru", "Pack Bee", "Snail", "Shiba Inu", "Maneko Neko", "Silver Monkey", "Mandrake", "Sunny Side Chicken", "Blood Kiwi", "Bagel Bunny", "Mouse", "Brown Mouse", "Golden Lab", "Monkey", "Flamingo", "Sea Turtle", "Turtle", "Caterpillar", "Orange Tabby", "Cat", "Cow"},
+    ["E Tier"] = {"Lab", "Echo Frog", "Frog", "Kiwi", "Pig", "Tanuki", "Seagull", "Sea Otter", "Black Bunny", "Bunny", "Rooster", "Chicken", "Elk", "Spotted Deer", "Deer", "Panda", "Crab", "Parasaurolophus"}
+}
+
+-- إنشاء الأزرار داخل Scroll
+local yOffset = 0
+for tierName, pets in pairs(tiers) do
+    local TierLabel = Instance.new("TextLabel")
+    TierLabel.Size = UDim2.new(1, -10, 0, 25)
+    TierLabel.Position = UDim2.new(0, 5, 0, yOffset)
+    TierLabel.BackgroundTransparency = 1
+    TierLabel.Text = tierName
+    TierLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+    TierLabel.Font = Enum.Font.SourceSansBold
+    TierLabel.TextSize = 18
+    TierLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TierLabel.Parent = Scroll
+    yOffset = yOffset + 25
+
+    for i, pet in ipairs(pets) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(1, -20, 0, 25)
+        btn.Position = UDim2.new(0, 10, 0, yOffset)
+        btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.Font = Enum.Font.SourceSans
+        btn.TextSize = 16
+        btn.Text = pet
+        btn.Parent = Scroll
+
+        btn.MouseButton1Click:Connect(function()
+            setclipboard(pet)
+            btn.Text = pet.." ✅"
+            task.delay(1, function() btn.Text = pet end)
+        end)
+        yOffset = yOffset + 30
+    end
+end
+
+Scroll.CanvasSize = UDim2.new(0, 0, 0, yOffset)
